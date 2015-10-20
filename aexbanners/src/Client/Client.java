@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aexbanners;
+package Client;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  *
  * @author Hovsep
  */
-public class Aexbanners extends Application {
+public class Client extends Application {
     
     private static AEXBanner banner;
     /**

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aexbanners;
+package Server;
 
+import shared.IEffectenbeurs;
+import shared.IFonds;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -14,8 +16,7 @@ public class MockEffectenbeurs implements IEffectenbeurs {
 
     ArrayList<Fonds> koersen;
     Timer timer;
-    
-    
+
     public MockEffectenbeurs() {
         koersen = new ArrayList<Fonds>();
         koersen.add(new Fonds("Unilever", 100));
@@ -31,18 +32,24 @@ public class MockEffectenbeurs implements IEffectenbeurs {
         //todo: problemen
         return new ArrayList<IFonds>(koersen);
     }
-    
-        class MockTask extends TimerTask {
+
+    class MockTask extends TimerTask {
 
         @Override
         public void run() {
             for (Fonds f : koersen) {
                 if (Math.floor(Math.random() * 101) == 0) {
-                    f.setKoers(f.getKoers() + Math.floor(Math.random() * 56-10));
+                    f.setKoers(f.getKoers() + Math.floor(Math.random() * 56 - 10));
                 }
             }
         }
     }
-    
-    
+
+    @Override
+    public void stop() 
+    {
+        timer.cancel();
+        
+    }
+
 }

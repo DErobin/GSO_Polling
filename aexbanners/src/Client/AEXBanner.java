@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aexbanners;
+package Client;
 import java.awt.Graphics2D;
 /**
  *
@@ -11,12 +11,14 @@ import java.awt.Graphics2D;
  */
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class AEXBanner extends Application {
 
@@ -32,8 +34,15 @@ public class AEXBanner extends Application {
     private AnimationTimer animationTimer;
 
     @Override
-    public void start(Stage primaryStage) {
-
+    public void start(Stage primaryStage) 
+    {
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() 
+        {
+            @Override
+            public void handle(WindowEvent we) {
+                stop();
+            }
+        });
         controller = new BannerController(this);
 
         Font font = new Font("Arial", HEIGHT);
@@ -61,7 +70,7 @@ public class AEXBanner extends Application {
                 {
                     textPosition-=5;
                     if(textPosition <= 0-textLength)
-                        textPosition = WIDTH;
+                        textPosition = scene.getWidth();//WIDTH;
                         
                     
                     text.relocate(textPosition, 0);
@@ -91,6 +100,7 @@ public class AEXBanner extends Application {
     public void stop() {
         animationTimer.stop();
         controller.stop();
+        //System.exit(1);
     }
 
 }

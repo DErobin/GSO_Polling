@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aexbanners;
+package shared;
 
 /**
  *
  * @author Hovsep
  */
-import java.util.List;
+public interface IFonds {
 
-public interface IEffectenbeurs {
+	String getNaam();
 
-	List<IFonds> getKoersen();
+	double getKoers();
 
 }

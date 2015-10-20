@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aexbanners;
+package Client;
 
+import Server.MockEffectenbeurs;
+import shared.IEffectenbeurs;
+import shared.IFonds;
 import java.rmi.RemoteException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,7 +30,7 @@ public class BannerController {
         this.effectenbeurs = new MockEffectenbeurs();
         //Start polling timer: update banner every two seconds
         pollingTimer = new Timer();
-        pollingTimer.scheduleAtFixedRate(new fondsTask(), 100, 200);
+        pollingTimer.scheduleAtFixedRate(new fondsTask(), 1000, 200);
     }
 
     class fondsTask extends TimerTask {
@@ -55,8 +58,9 @@ public class BannerController {
     // Stop banner controller
     public void stop() {
         pollingTimer.cancel();
+        effectenbeurs.stop();
         // Stop simulation timer of effectenbeurs
         // TODO
-        Thread.currentThread().interrupt();
+        //Thread.currentThread().interrupt();
     }
 }
