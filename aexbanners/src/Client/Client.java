@@ -21,8 +21,6 @@ public class Client extends Application {
     public static void main(String[] args) 
     {
         launch(args);
-        //BannerController  bc = new BannerController(banner);
-        // TODO code application logic here
     }
 
     @Override

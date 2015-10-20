@@ -21,10 +21,4 @@ public class Effectenbeurs implements IEffectenbeurs {
     public ArrayList<IFonds> getKoersen() {
         return koersen;
     }
-
-    @Override
-    public void stop() 
-    {
-        throw new UnsupportedOperationException("NIET NODIG"); //To change body of generated methods, choose Tools | Templates.
-    }
 }

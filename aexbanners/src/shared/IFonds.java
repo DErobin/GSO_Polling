@@ -5,11 +5,13 @@
  */
 package shared;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Hovsep
  */
-public interface IFonds {
+public interface IFonds extends Serializable{
 
 	String getNaam();
 

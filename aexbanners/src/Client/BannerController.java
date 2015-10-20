@@ -5,10 +5,12 @@
  */
 package Client;
 
-import Server.MockEffectenbeurs;
+import java.rmi.NotBoundException;
 import shared.IEffectenbeurs;
 import shared.IFonds;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -21,13 +23,46 @@ import java.util.logging.Logger;
 public class BannerController {
 
     private AEXBanner banner;
+    
+    //RMI:
+    private static final int port = 1099;
+    private static final String bindName = "AEX";
+    private Registry registry;
+    //todo PAS DIT AAN
+    private static final String ip = "192.168.0.8";
+    
     private IEffectenbeurs effectenbeurs;
     private Timer pollingTimer;
 
     public BannerController(AEXBanner banner) {
 
         this.banner = banner;
-        this.effectenbeurs = new MockEffectenbeurs();
+        
+        System.out.println("Client gestart. RMI IP:" + ip + ":"+port);
+        
+        //Registry:
+        try
+        {
+            registry = LocateRegistry.getRegistry(ip, port);
+        }
+        catch (RemoteException e)
+        {
+            System.out.println("Kan registry niet vinden: " + e.getMessage());
+        }
+        
+        //Bind de effectenbeurs:
+        try
+        {
+            this.effectenbeurs = (IEffectenbeurs) registry.lookup(bindName);
+        }
+        catch(NotBoundException e)
+        {
+            System.out.println("Probleem bij het binden: " + e.getMessage());
+        }
+        catch(RemoteException e)
+        {
+            System.out.println("Probleem bij het binden: " + e.getMessage());
+        }
         //Start polling timer: update banner every two seconds
         pollingTimer = new Timer();
         pollingTimer.scheduleAtFixedRate(new fondsTask(), 1000, 200);
@@ -38,13 +73,19 @@ public class BannerController {
         @Override
         public void run() 
         {
-            
-            banner.setKoersen(getKoers());
+            try
+            {
+                banner.setKoersen(getKoers());
+            }
+            catch(RemoteException e)
+            {
+                System.out.println("Error bij ophalen koersen: " + e.getMessage());
+            }
             //banner.setKoersen(sb.toString());
         }
     }
     
-    private String getKoers()
+    private String getKoers() throws RemoteException
     {
         StringBuilder sb = new StringBuilder("");
 
@@ -58,9 +99,5 @@ public class BannerController {
     // Stop banner controller
     public void stop() {
         pollingTimer.cancel();
-        effectenbeurs.stop();
-        // Stop simulation timer of effectenbeurs
-        // TODO
-        //Thread.currentThread().interrupt();
     }
 }
