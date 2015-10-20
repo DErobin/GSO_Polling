@@ -28,6 +28,7 @@ public class MockEffectenbeurs implements IEffectenbeurs {
 
     @Override
     public List<IFonds> getKoersen() {
+        //todo: problemen
         return new ArrayList<IFonds>(koersen);
     }
     

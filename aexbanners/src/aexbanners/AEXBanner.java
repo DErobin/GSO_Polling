@@ -44,7 +44,7 @@ public class AEXBanner extends Application {
         Pane root = new Pane();
         root.getChildren().add(text);
         Scene scene = new Scene(root, WIDTH, HEIGHT);
-
+        
         primaryStage.setTitle("AEX banner");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -57,10 +57,14 @@ public class AEXBanner extends Application {
             @Override
             public void handle(long now) {
                 long lag = now - prevUpdate;
-                if (lag >= NANO_TICKS) {
-                    // calculate new location of text
-                    // TODO
+                if (lag >= NANO_TICKS) 
+                {
+                    textPosition-=5;
+                    if(textPosition <= 0-textLength)
+                        textPosition = WIDTH;
+                    
                     text.relocate(textPosition, 0);
+                    //System.out.println(textPosition);
                     prevUpdate = now;
                 }
             }
@@ -70,7 +74,9 @@ public class AEXBanner extends Application {
                 prevUpdate = System.nanoTime();
                 textPosition = WIDTH;
                 text.relocate(textPosition, 0);
-                setKoersen("Nothing to display");
+                setKoersen("TEST");
+                setKoersen("DRUIF");
+                setKoersen("K");
                 super.start();
             }
         };

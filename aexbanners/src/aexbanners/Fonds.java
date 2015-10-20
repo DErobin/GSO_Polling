@@ -9,7 +9,7 @@ package aexbanners;
  *
  * @author Hovsep
  */
-public class Fonds {
+public class Fonds implements IFonds{
 
     String fondsnaam;
     double koers;
@@ -33,6 +33,12 @@ public class Fonds {
 
     public void setKoers(double koers) {
         this.koers = koers;
+    }
+
+    @Override
+    public String getNaam()
+    {
+        return fondsnaam;
     }
 
 }

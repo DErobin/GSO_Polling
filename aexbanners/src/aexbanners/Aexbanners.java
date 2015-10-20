@@ -21,7 +21,7 @@ public class Aexbanners extends Application {
     public static void main(String[] args) 
     {
         launch(args);
-        BannerController  bc = new BannerController(banner);
+        //BannerController  bc = new BannerController(banner);
         // TODO code application logic here
     }
 
