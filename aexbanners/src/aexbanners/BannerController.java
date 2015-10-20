@@ -27,20 +27,29 @@ public class BannerController {
         this.effectenbeurs = new MockEffectenbeurs();
         //Start polling timer: update banner every two seconds
         pollingTimer = new Timer();
-        pollingTimer.scheduleAtFixedRate(new fondsTask(), 1000, 2000);
+        pollingTimer.scheduleAtFixedRate(new fondsTask(), 100, 200);
     }
 
     class fondsTask extends TimerTask {
 
         @Override
-        public void run() {
-            StringBuilder sb = new StringBuilder("");
-
-            for (IFonds f : effectenbeurs.getKoersen()) {
-                sb.append(f.getNaam()).append(": ").append(f.getKoers()).append(" - ");
-            }
-            banner.setKoersen(sb.toString());
+        public void run() 
+        {
+            
+            banner.setKoersen(getKoers());
+            //banner.setKoersen(sb.toString());
         }
+    }
+    
+    private String getKoers()
+    {
+        StringBuilder sb = new StringBuilder("");
+
+        for (IFonds f : effectenbeurs.getKoersen()) 
+        {
+            sb.append(f.getNaam()).append(": ").append(f.getKoers()).append(" ");
+        }
+        return sb.toString();
     }
 
     // Stop banner controller

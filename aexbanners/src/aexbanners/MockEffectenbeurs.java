@@ -38,7 +38,7 @@ public class MockEffectenbeurs implements IEffectenbeurs {
         public void run() {
             for (Fonds f : koersen) {
                 if (Math.floor(Math.random() * 101) == 0) {
-                    f.setKoers(f.getKoers() + Math.floor(Math.random() * 56));
+                    f.setKoers(f.getKoers() + Math.floor(Math.random() * 56-10));
                 }
             }
         }

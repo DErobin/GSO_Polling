@@ -62,6 +62,7 @@ public class AEXBanner extends Application {
                     textPosition-=5;
                     if(textPosition <= 0-textLength)
                         textPosition = WIDTH;
+                        
                     
                     text.relocate(textPosition, 0);
                     //System.out.println(textPosition);
