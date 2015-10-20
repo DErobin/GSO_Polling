@@ -5,6 +5,8 @@
  */
 package Server;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import shared.IEffectenbeurs;
 import shared.IFonds;
 import java.util.ArrayList;
@@ -12,12 +14,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MockEffectenbeurs implements IEffectenbeurs {
+public class MockEffectenbeurs extends UnicastRemoteObject implements IEffectenbeurs {
 
     ArrayList<Fonds> koersen;
     Timer timer;
 
-    public MockEffectenbeurs() {
+    public MockEffectenbeurs() throws RemoteException {
         koersen = new ArrayList<Fonds>();
         koersen.add(new Fonds("Unilever", 100));
         koersen.add(new Fonds("Apple", 60));

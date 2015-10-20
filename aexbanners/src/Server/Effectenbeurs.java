@@ -23,7 +23,8 @@ public class Effectenbeurs implements IEffectenbeurs {
     }
 
     @Override
-    public void stop() {
+    public void stop() 
+    {
         throw new UnsupportedOperationException("NIET NODIG"); //To change body of generated methods, choose Tools | Templates.
     }
 }
