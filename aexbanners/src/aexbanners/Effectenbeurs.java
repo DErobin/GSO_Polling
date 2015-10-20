@@ -10,14 +10,13 @@ package aexbanners;
  * @author Hovsep
  */
 import java.util.ArrayList;
-import java.util.List;
 
 public class Effectenbeurs implements IEffectenbeurs {
 
     ArrayList<IFonds> koersen;
 
     @Override
-    public List<IFonds> getKoersen() {
+    public ArrayList<IFonds> getKoersen() {
         return koersen;
     }
 }

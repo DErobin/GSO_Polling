@@ -19,14 +19,11 @@ public class Fonds implements IFonds{
         this.koers = koers;
     }
 
-    public String getFondsnaam() {
-        return fondsnaam;
-    }
-
     public void setFondsnaam(String fondsnaam) {
         this.fondsnaam = fondsnaam;
     }
-
+    
+    @Override
     public double getKoers() {
         return koers;
     }

@@ -74,10 +74,8 @@ public class AEXBanner extends Application {
                 prevUpdate = System.nanoTime();
                 textPosition = WIDTH;
                 text.relocate(textPosition, 0);
-                setKoersen("TEST");
-                setKoersen("DRUIF");
-                setKoersen("K");
                 super.start();
+                
             }
         };
         animationTimer.start();

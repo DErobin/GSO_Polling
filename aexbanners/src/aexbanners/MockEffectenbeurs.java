@@ -23,7 +23,7 @@ public class MockEffectenbeurs implements IEffectenbeurs {
         koersen.add(new Fonds("Samsung", 80));
         koersen.add(new Fonds("Asus", 65));
         timer = new Timer();
-        
+        timer.scheduleAtFixedRate(new MockTask(), 0, 20);
     }
 
     @Override

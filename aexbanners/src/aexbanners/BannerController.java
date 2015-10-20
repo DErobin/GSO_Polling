@@ -5,13 +5,17 @@
  */
 package aexbanners;
 
+import java.rmi.RemoteException;
 import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Robin
  */
-public class BannerController 
-{
+public class BannerController {
 
     private AEXBanner banner;
     private IEffectenbeurs effectenbeurs;
@@ -21,10 +25,22 @@ public class BannerController
 
         this.banner = banner;
         this.effectenbeurs = new MockEffectenbeurs();
-        
         //Start polling timer: update banner every two seconds
         pollingTimer = new Timer();
-        // TODO
+        pollingTimer.scheduleAtFixedRate(new fondsTask(), 1000, 2000);
+    }
+
+    class fondsTask extends TimerTask {
+
+        @Override
+        public void run() {
+            StringBuilder sb = new StringBuilder("");
+
+            for (IFonds f : effectenbeurs.getKoersen()) {
+                sb.append(f.getNaam()).append(": ").append(f.getKoers()).append(" - ");
+            }
+            banner.setKoersen(sb.toString());
+        }
     }
 
     // Stop banner controller
@@ -32,6 +48,6 @@ public class BannerController
         pollingTimer.cancel();
         // Stop simulation timer of effectenbeurs
         // TODO
+        Thread.currentThread().interrupt();
     }
 }
-
